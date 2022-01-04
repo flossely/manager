@@ -42,7 +42,7 @@ function manage(mode, id, data) {
 </p>
 <p align="center">
 <input class='actionButton' type="button" style="width:18%;" value="MODIFY" onclick="manage('modify', entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:18%;" value="UPDATE" onclick="seq('i,from,stats,flossely;i,from,manager,flossely;i,from,entity,flossely');">
+<input class='actionButton' type="button" style="width:18%;" value="UPDATE" onclick="seq('i,from,manager,flossely;i,from,entity,flossely');">
 <input class='actionButton' type="button" style="width:18%;" value="EXIT" onclick="window.location.href = 'index.php';">
 </p>
 </body>
