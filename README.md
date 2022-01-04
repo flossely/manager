@@ -1,2 +1,2 @@
-# manager
+# Manager
 An entity manager.
