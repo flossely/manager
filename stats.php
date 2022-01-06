@@ -94,7 +94,7 @@ foreach ($list as $key=>$value) {
     $sideicon = 'sys.'.$thymode.'.png';
     if ($thyrating >= 0) {
         if (($disp % 2) == 0) {
-            $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : 'sys.usr.png';
+            $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
         } else {
             $icon = (file_exists($value.'/foot.png')) ? $value.'/foot.png' : 'sys.redfoot.png';
         }
