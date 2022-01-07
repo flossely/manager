@@ -35,15 +35,15 @@ function manage(mode, id, data) {
 </textarea>
 </p>
 <p align="center">
-<input class='actionButton' type="button" style="width:15%;" value="INIT" onclick="manage('init', entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:15%;" value="KILL" onclick="manage('kill', entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:18%;" value="MERGE" onclick="manage('merge', entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:18%;" value="DIVIDE" onclick="manage('divide', entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:64px;" value="INIT" onclick="manage('init', entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:64px;" value="KILL" onclick="manage('kill', entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:86px;" value="MERGE" onclick="manage('merge', entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:86px;" value="DIVIDE" onclick="manage('divide', entityID.value, entities.value);">
 </p>
 <p align="center">
-<input class='actionButton' type="button" style="width:18%;" value="MODIFY" onclick="manage('modify', entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:18%;" value="UPDATE" onclick="seq('i,from,manager,flossely;i,from,entity,flossely');">
-<input class='actionButton' type="button" style="width:18%;" value="EXIT" onclick="window.location.href = 'index.php';">
+<input class='actionButton' type="button" style="width:96px;" value="MODIFY" onclick="manage('modify', entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:96px;" value="UPDATE" onclick="seq('i,from,manager,flossely;i,from,entity,flossely');">
+<input class='actionButton' type="button" style="width:64px;" value="EXIT" onclick="window.location.href = 'index.php';">
 </p>
 </body>
 </html>
