@@ -63,9 +63,9 @@ foreach ($list as $key=>$value) {
     $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : 'sys.launch.png';
     $link = (file_exists($value.'/index.php')) ? $value : $value.'/get.php?key=i&pkg=from&repo=assemble&user=flossely';
 ?>
-<img height="22%" src="<?=$icon;?>?rev=<?=time();?>" name="<?=$link;?>" onclick="window.location.href = this.name;">
+<img height="22%" src="<?=$icon;?>?rev=<?=time();?>" name="<?=$link;?>" onclick="window.location.href = this.name;" title="<?=$value;?>">
 <?php } ?>
-<img height="22%" src="sys.exit.png?rev=<?=time();?>" onclick="window.location.href = '../../';">
+<img height="22%" src="sys.exit.png?rev=<?=time();?>" onclick="window.location.href = '../../';" title="Exit">
 </p>
 </div>
 </body>
