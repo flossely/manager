@@ -74,7 +74,7 @@ function swap(x) {
     find();
 }">
 <input class='actionButton' type="button" value=">" onclick="find();">
-<input class='actionButton' type="button" name="<?=$disp;?>" value="/" onclick="swap(this.name);">
+<input class='actionButton' type="button" name="<?=$disp;?>" value="<?=$disp;?>" onclick="swap(this.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 </p>
 </div>
