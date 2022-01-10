@@ -75,7 +75,7 @@ function vote(id,key) {
     find();
 }">
 <input class='actionButton' type="button" value=">" onclick="find();">
-<input class='actionButton' type="button" value=">" onclick="swap('<?=$disp;?>');">
+<input class='actionButton' type="button" value="/" onclick="swap('<?=$disp;?>');">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 </p>
 </div>
