@@ -62,8 +62,7 @@ function vote(id,key) {
     xmlhttp.send();
 }
 function swap(x) {
-    int[] swap = {1, 0};
-    x = swap[x];
+    x = 1 - x;
     window.location.href = 'stats.php?disp=' + x;
 }
 </script>
