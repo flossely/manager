@@ -29,6 +29,11 @@ foreach ($list as $key=>$value) {
 <script src="jquery.js"></script>
 <script src="sort.js"></script>
 <script>
+function swap(x) {
+    int[] swap = {1, 0};
+    x = swap[x];
+    window.location.href = 'stats.php?disp=' + x;
+}
 window.onload = function() {
     document.getElementById('search').focus();
 }
@@ -70,6 +75,7 @@ function vote(id,key) {
     find();
 }">
 <input class='actionButton' type="button" value=">" onclick="find();">
+<input class='actionButton' type="button" value=">" onclick="swap('<?=$disp;?>');">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 </p>
 </div>
