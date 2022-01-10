@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>Entity Manager</title>
-<link rel="shortcut icon" href="sys.manager.png?rev=<?=time();?>" type="image/x-icon">
+<link rel="shortcut icon" href="sys.manage.png?rev=<?=time();?>" type="image/x-icon">
 <link href="system.css?rev=<?=time();?>" rel="stylesheet">
 <script src="base.js"></script>
 <script src="jquery.js"></script>
