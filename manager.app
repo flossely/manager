@@ -1,1 +1,1 @@
-Entity Manager=||=sys.manager.png=||=window.location.href='manager.php';
+Entity Manager=||=sys.manage.png=||=window.location.href='manager.php';
