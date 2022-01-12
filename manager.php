@@ -41,6 +41,10 @@ function manage(mode, id, data) {
 <input class='actionButton' type="button" style="width:86px;" value="DIVIDE" onclick="manage('divide', entityID.value, entities.value);">
 </p>
 <p align="center">
+<input class='actionButton' type="button" style="width:64px;" value="JOIN" onclick="manage('join', entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:80px;" value="LEAVE" onclick="manage('leave', entityID.value, entities.value);">
+</p>
+<p align="center">
 <input class='actionButton' type="button" style="width:96px;" value="MODIFY" onclick="manage('modify', entityID.value, entities.value);">
 <input class='actionButton' type="button" style="width:96px;" value="UPDATE" onclick="seq('i,from,manager,flossely;i,from,entity,flossely');">
 <input class='actionButton' type="button" style="width:64px;" value="EXIT" onclick="window.location.href = 'index.php';">
