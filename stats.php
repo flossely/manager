@@ -8,6 +8,13 @@ if ($_REQUEST) {
         $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     }
     $disp = ($_REQUEST['disp']) ? $_REQUEST['disp'] : 0;
+    if (($disp % 2) != 0) {
+        foreach ($list as $key=>$value) {
+            if (!file_exists($value.'/foot.png')) {
+                unset($list[array_search($value, $list)]);
+            }
+        }
+    }
 } else {
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     $disp = 0;
@@ -65,6 +72,19 @@ function swap(x) {
     x = 1 - x;
     window.location.href = 'stats.php?disp=' + x;
 }
+function manage(mode, id, data) {
+    var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
+    $.ajax({
+        type: "POST",
+        url: "manage.php",
+        data: dataString,
+        cache: false,
+        success: function(html) {
+            document.location.reload();
+        }
+    });
+    return false;
+}
 </script>
 </head>
 <body>
@@ -106,7 +126,7 @@ foreach ($list as $key=>$value) {
         $link = $value;
     } elseif ($thyrating < 0) {
         $icon = 'sys.dead.png';
-        $link = 'console.php?exid=check&id='.$value;
+        $link = "javascript:manage('kill', '', '".$value."');";
     }
 ?>
 <tr>
