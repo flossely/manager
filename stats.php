@@ -52,10 +52,10 @@ function find() {
     }
     xmlhttp.onreadystatechange=function() {
         if (this.readyState==4 && this.status==200) {
-            window.location.href = "stats.php?q="+q;
+            window.location.href = "stats.php?q="+q+"&view="+viewField.name+"&disp="+dispField.name+"&size="+sizeField.name;
         }
     }
-    xmlhttp.open("GET","stats.php?q="+q,false);
+    xmlhttp.open("GET","stats.php?q="+q+"&view="+viewField.name+"&disp="+dispField.name+"&size="+sizeField.name,false);
     xmlhttp.send();
 }
 function vote(id,key) {
@@ -98,8 +98,11 @@ function manage(mode, id, data) {
     find();
 }">
 <input class='actionButton' type="button" value=">" onclick="find();">
-<input class='actionButton' id='viewButton' type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(this.name);">
+<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(this.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
+<input type='hidden' id='viewField' name="<?=$view;?>">
+<input type='hidden' id='dispField' name="<?=$disp;?>">
+<input type='hidden' id='sizeField' name="<?=$size;?>">
 </p>
 </div>
 <div class='panel'>
