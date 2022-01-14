@@ -7,7 +7,9 @@ if ($_REQUEST) {
     } else {
         $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     }
+    $view = ($_REQUEST['view']) ? $_REQUEST['view'] : 0;
     $disp = ($_REQUEST['disp']) ? $_REQUEST['disp'] : 0;
+    $size = ($_REQUEST['size']) ? $_REQUEST['size'] : 72;
     if (($disp % 2) != 0) {
         foreach ($list as $key=>$value) {
             if (!file_exists($value.'/foot.png')) {
@@ -17,7 +19,9 @@ if ($_REQUEST) {
     }
 } else {
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
+    $view = 0;
     $disp = 0;
+    $size = 72;
 }
 foreach ($list as $key=>$value) {
     if (!file_exists($value.'/mode') && !file_exists($value.'/rating')) {
@@ -70,7 +74,7 @@ function vote(id,key) {
 }
 function swap(x) {
     x = 1 - x;
-    window.location.href = 'stats.php?disp=' + x;
+    window.location.href = 'stats.php?view=' + x + '&disp=' + x;
 }
 function manage(mode, id, data) {
     var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
@@ -94,11 +98,12 @@ function manage(mode, id, data) {
     find();
 }">
 <input class='actionButton' type="button" value=">" onclick="find();">
-<input class='actionButton' type="button" name="<?=$disp;?>" value="<?=$disp;?>" onclick="swap(this.name);">
+<input class='actionButton' id='viewButton' type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(this.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 </p>
 </div>
 <div class='panel'>
+<?php if (($view % 2) == 0) { ?>
 <table id="table" width="100%">
 <thead>
 <tr>
@@ -155,6 +160,30 @@ foreach ($list as $key=>$value) {
 <?php } ?>
 </tbody>
 </table>
+<?php
+} else {
+    foreach ($list as $key=>$value) {
+        $thymode = file_get_contents($value.'/mode');
+        $thyrating = file_get_contents($value.'/rating');
+        $sideicon = 'sys.'.$thymode.'.png';
+        if ($thyrating >= 0) {
+            if (($disp % 2) == 0) {
+                $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
+                $link = $value;
+            } else {
+                $icon = (file_exists($value.'/foot.png')) ? $value.'/foot.png' : "sys.foot.".$mode.".png";
+                $link = $icon;
+            }
+        } elseif ($thyrating < 0) {
+            $icon = 'sys.dead.png';
+            $link = "javascript:manage('kill', '', '".$value."');";
+        }
+?>
+<img style="height:<?=$size;?>%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$icon;?>?rev=<?=time();?>" onclick="window.location.href=this.name">
+<?php } ?>
+<p>
+</p>
+<?php } ?>
 </div>
 </body>
 </html>
