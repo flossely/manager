@@ -1,7 +1,7 @@
 <?php
 $dir = '.';
 if ($_REQUEST) {
-    $q = $_REQUEST['q'];
+    $q = ($_REQUEST['q']) ? $_REQUEST['q'] : '';
     if ($q != '') {
         $list = str_replace($dir.'/','',(glob($dir.'/*{'.$q.'}*', GLOB_ONLYDIR | GLOB_BRACE)));
     } else {
@@ -18,6 +18,7 @@ if ($_REQUEST) {
         }
     }
 } else {
+    $q = '';
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     $view = 0;
     $disp = 0;
@@ -43,20 +44,8 @@ foreach ($list as $key=>$value) {
 window.onload = function() {
     document.getElementById('search').focus();
 }
-function find() {
-    var q = search.value;
-    if (window.XMLHttpRequest)     {
-        xmlhttp=new XMLHttpRequest();
-    } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-            window.location.href = "stats.php?q="+q+"&view="+viewField.name+"&disp="+dispField.name+"&size="+sizeField.name;
-        }
-    }
-    xmlhttp.open("GET","stats.php?q="+q+"&view="+viewField.name+"&disp="+dispField.name+"&size="+sizeField.name,false);
-    xmlhttp.send();
+function find(q) {
+    window.location.href = "stats.php?q="+q+"&view="+viewField.name+"&disp="+dispField.name+"&size="+sizeField.name;
 }
 function vote(id,key) {
     if (window.XMLHttpRequest) {
@@ -72,9 +61,9 @@ function vote(id,key) {
     xmlhttp.open("GET","vote.php?id="+id+"&key="+key,false);
     xmlhttp.send();
 }
-function swap(x) {
+function swap(q, x) {
     x = 1 - x;
-    window.location.href = 'stats.php?view=' + x + '&disp=' + x;
+    window.location.href = 'stats.php?q=' + q + '&view=' + x + '&disp=' + x;
 }
 function manage(mode, id, data) {
     var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
@@ -95,11 +84,12 @@ function manage(mode, id, data) {
 <div class='top'>
 <p align="center">
 <input style="width:60%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
-    find();
+    find(this.value);
 }">
-<input class='actionButton' type="button" value=">" onclick="find();">
-<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(this.name);">
+<input class='actionButton' type="button" value=">" onclick="find(search.value);">
+<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(qField.name, this.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
+<input type='hidden' id='qField' name="<?=$q;?>">
 <input type='hidden' id='viewField' name="<?=$view;?>">
 <input type='hidden' id='dispField' name="<?=$disp;?>">
 <input type='hidden' id='sizeField' name="<?=$size;?>">
