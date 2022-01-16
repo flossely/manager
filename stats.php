@@ -51,7 +51,7 @@ window.onload = function() {
     document.getElementById('search').focus();
 }
 function find(q) {
-    window.location.href = "stats.php?q="+q+"&view="+viewField.name+"&disp="+dispField.name+"&size="+sizeField.name;
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + aField.name + '&view=' + viewField.name + '&disp=' + dispField.name;
 }
 function vote(id,key) {
     if (window.XMLHttpRequest) {
