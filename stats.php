@@ -1,5 +1,12 @@
 <?php
 $dir = '.';
+function alpha($a) {
+    if ($a == '') {
+        return 'u';
+    } else {
+        return $a;
+    }
+}
 if ($_REQUEST) {
     $q = ($_REQUEST['q']) ? $_REQUEST['q'] : '';
     if ($q != '') {
@@ -9,10 +16,10 @@ if ($_REQUEST) {
     }
     $view = ($_REQUEST['view']) ? $_REQUEST['view'] : 0;
     $disp = ($_REQUEST['disp']) ? $_REQUEST['disp'] : 0;
-    $size = ($_REQUEST['size']) ? $_REQUEST['size'] : 72;
+    $alpha = ($_REQUEST['alpha']) ? $_REQUEST['alpha'] : '';
     if (($disp % 2) != 0) {
         foreach ($list as $key=>$value) {
-            if (!file_exists($value.'/foot.png')) {
+            if (!file_exists($value.'/foot'.$alpha.'.png')) {
                 unset($list[array_search($value, $list)]);
             }
         }
@@ -22,7 +29,6 @@ if ($_REQUEST) {
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     $view = 0;
     $disp = 0;
-    $size = 72;
 }
 foreach ($list as $key=>$value) {
     if (!file_exists($value.'/mode') && !file_exists($value.'/rating')) {
@@ -61,9 +67,21 @@ function vote(id,key) {
     xmlhttp.open("GET","vote.php?id="+id+"&key="+key,false);
     xmlhttp.send();
 }
-function swap(q, x) {
+function swap(a, q, x) {
     x = 1 - x;
-    window.location.href = 'stats.php?q=' + q + '&view=' + x + '&disp=' + x;
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x + '&disp=' + x;
+}
+function rotate(a, q, x) {
+    if (a == '') {
+        a = 'r';
+    } else if (a == 'r') {
+        a = 'd';
+    } else if (a == 'd') {
+        a = 'l';
+    } else if (a == 'l') {
+        a = '';
+    }
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x + '&disp=' + x;
 }
 function manage(mode, id, data) {
     var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
@@ -87,12 +105,13 @@ function manage(mode, id, data) {
     find(this.value);
 }">
 <input class='actionButton' type="button" value=">" onclick="find(search.value);">
-<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(qField.name, this.name);">
+<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(aField.name, qField.name, viewField.name);">
+<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=alpha($alpha);?>" onclick="rotate(aField.name, qField.name, viewField.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
+<input type='hidden' id='aField' name="<?=$alpha;?>">
 <input type='hidden' id='viewField' name="<?=$view;?>">
 <input type='hidden' id='dispField' name="<?=$disp;?>">
-<input type='hidden' id='sizeField' name="<?=$size;?>">
 </p>
 </div>
 <div class='panel'>
@@ -164,7 +183,7 @@ foreach ($list as $key=>$value) {
                 $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
                 $link = $value;
             } else {
-                $icon = (file_exists($value.'/foot.png')) ? $value.'/foot.png' : "sys.foot.".$mode.".png";
+                $icon = (file_exists($value.'/foot'.$alpha.'.png')) ? $value.'/foot'.$alpha.'.png' : "sys.foot.".$mode.".png";
                 $link = $icon;
             }
         } elseif ($thyrating < 0) {
@@ -172,7 +191,7 @@ foreach ($list as $key=>$value) {
             $link = "javascript:manage('kill', '', '".$value."');";
         }
 ?>
-<img style="height:<?=$size;?>%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$icon;?>?rev=<?=time();?>" onclick="window.location.href=this.name">
+<img style="width:96%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$icon;?>?rev=<?=time();?>" onclick="window.location.href=this.name">
 <?php } ?>
 <p>
 </p>
