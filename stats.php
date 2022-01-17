@@ -8,7 +8,6 @@ if ($_REQUEST) {
         $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     }
     $view = ($_REQUEST['view']) ? $_REQUEST['view'] : 0;
-    $disp = ($_REQUEST['disp']) ? $_REQUEST['disp'] : 0;
     $alpha = ($_REQUEST['alpha']) ? $_REQUEST['alpha'] : 'u';
     if (($view % 2) != 0) {
         foreach ($list as $key=>$value) {
@@ -21,7 +20,7 @@ if ($_REQUEST) {
     $q = '';
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     $view = 0;
-    $disp = 0;
+    $alpha = 'u';
 }
 foreach ($list as $key=>$value) {
     if (!file_exists($value.'/mode') && !file_exists($value.'/rating')) {
