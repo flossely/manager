@@ -1,12 +1,5 @@
 <?php
 $dir = '.';
-function alpha($a) {
-    if ($a == '') {
-        return 'u';
-    } else {
-        return $a;
-    }
-}
 if ($_REQUEST) {
     $q = ($_REQUEST['q']) ? $_REQUEST['q'] : '';
     if ($q != '') {
@@ -16,8 +9,8 @@ if ($_REQUEST) {
     }
     $view = ($_REQUEST['view']) ? $_REQUEST['view'] : 0;
     $disp = ($_REQUEST['disp']) ? $_REQUEST['disp'] : 0;
-    $alpha = ($_REQUEST['alpha']) ? $_REQUEST['alpha'] : '';
-    if (($disp % 2) != 0) {
+    $alpha = ($_REQUEST['alpha']) ? $_REQUEST['alpha'] : 'u';
+    if (($view % 2) != 0) {
         foreach ($list as $key=>$value) {
             if (!file_exists($value.'/foot'.$alpha.'.png')) {
                 unset($list[array_search($value, $list)]);
@@ -51,7 +44,7 @@ window.onload = function() {
     document.getElementById('search').focus();
 }
 function find(q) {
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + aField.name + '&view=' + viewField.name + '&disp=' + dispField.name;
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + aField.name + '&view=' + viewField.name;
 }
 function vote(id,key) {
     if (window.XMLHttpRequest) {
@@ -69,19 +62,19 @@ function vote(id,key) {
 }
 function swap(a, q, x) {
     x = 1 - x;
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x + '&disp=' + x;
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x;
 }
 function rotate(a, q, x) {
-    if (a == '') {
+    if (a == 'u') {
         a = 'r';
     } else if (a == 'r') {
         a = 'd';
     } else if (a == 'd') {
         a = 'l';
     } else if (a == 'l') {
-        a = '';
+        a = 'u';
     }
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x + '&disp=' + x;
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x;
 }
 function manage(mode, id, data) {
     var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
@@ -106,12 +99,11 @@ function manage(mode, id, data) {
 }">
 <input class='actionButton' type="button" value=">" onclick="find(search.value);">
 <input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(aField.name, qField.name, viewField.name);">
-<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=alpha($alpha);?>" onclick="rotate(aField.name, qField.name, viewField.name);">
+<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=$alpha;?>" onclick="rotate(aField.name, qField.name, viewField.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
 <input type='hidden' id='aField' name="<?=$alpha;?>">
 <input type='hidden' id='viewField' name="<?=$view;?>">
-<input type='hidden' id='dispField' name="<?=$disp;?>">
 </p>
 </div>
 <div class='panel'>
@@ -135,11 +127,7 @@ foreach ($list as $key=>$value) {
     $thyrating = file_get_contents($value.'/rating');
     $sideicon = 'sys.'.$thymode.'.png';
     if ($thyrating >= 0) {
-        if (($disp % 2) == 0) {
-            $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
-        } else {
-            $icon = (file_exists($value.'/foot.png')) ? $value.'/foot.png' : 'sys.redfoot.png';
-        }
+        $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
         $link = $value;
     } elseif ($thyrating < 0) {
         $icon = 'sys.dead.png';
@@ -178,24 +166,18 @@ foreach ($list as $key=>$value) {
         $thymode = file_get_contents($value.'/mode');
         $thyrating = file_get_contents($value.'/rating');
         $sideicon = 'sys.'.$thymode.'.png';
-        if ($thyrating >= 0) {
-            if (($disp % 2) == 0) {
-                $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
-                $link = $value;
-            } else {
-                $icon = (file_exists($value.'/foot'.$alpha.'.png')) ? $value.'/foot'.$alpha.'.png' : "sys.foot.".$mode.".png";
+        $footlist = str_replace($value.'/','',(glob($value.'/foot'.$alpha.'*.png')));
+        foreach ($footlist as $iter=>$item) {
+            if ($thyrating >= 0) {
+                $icon = (file_exists($value.'/'.$item)) ? $value.'/foot'.$alpha.'.png' : "sys.foot.".$thymode.".png";
                 $link = $icon;
+            } elseif ($thyrating < 0) {
+                $icon = 'sys.dead.png';
+                $link = "javascript:manage('kill', '', '".$value."');";
             }
-        } elseif ($thyrating < 0) {
-            $icon = 'sys.dead.png';
-            $link = "javascript:manage('kill', '', '".$value."');";
-        }
 ?>
-<img style="width:96%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$icon;?>?rev=<?=time();?>" onclick="window.location.href=this.name">
-<?php } ?>
-<p>
-</p>
-<?php } ?>
+<img style="width:96%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
+<?php }}} ?>
 </div>
 </body>
 </html>
