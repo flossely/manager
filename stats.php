@@ -168,7 +168,7 @@ foreach ($list as $key=>$value) {
         $footlist = str_replace($value.'/','',(glob($value.'/foot'.$alpha.'*.png')));
         foreach ($footlist as $iter=>$item) {
             if ($thyrating >= 0) {
-                $icon = (file_exists($value.'/'.$item)) ? $value.'/foot'.$alpha.'.png' : "sys.foot.".$thymode.".png";
+                $icon = (file_exists($value.'/'.$item)) ? $value.'/'.$item : "sys.foot.".$thymode.".png";
                 $link = $icon;
             } elseif ($thyrating < 0) {
                 $icon = 'sys.dead.png';
