@@ -111,7 +111,6 @@ function manage(mode, id, data) {
 <thead>
 <tr>
 <th width="8%">Icon</th>
-<th width="8%">Mode</th>
 <th width="20%">
 <a href="javascript:SortTable(2,'T');">Name</a></th>
 <th width="12%">
