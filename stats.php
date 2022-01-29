@@ -124,12 +124,11 @@ function manage(mode, id, data) {
 foreach ($list as $key=>$value) {
     $thymode = file_get_contents($value.'/mode');
     $thyrating = file_get_contents($value.'/rating');
-    $sideicon = 'sys.'.$thymode.'.png';
     if ($thyrating >= 0) {
-        $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr".$thymode.".png";
+        $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr.png";
         $link = $value;
     } elseif ($thyrating < 0) {
-        $icon = 'sys.dead.png';
+        $icon = 'sys.error.png';
         $link = "javascript:manage('kill', '', '".$value."');";
     }
 ?>
@@ -137,11 +136,6 @@ foreach ($list as $key=>$value) {
 <td>
 <a href="<?=$icon;?>">
 <img width="80%" src="<?=$icon;?>?rev=<?=time();?>">
-</a>
-</td>
-<td>
-<a href="<?=$sideicon;?>">
-<img width="80%" src="<?=$sideicon;?>?rev=<?=time();?>">
 </a>
 </td>
 <td>
@@ -153,7 +147,6 @@ foreach ($list as $key=>$value) {
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
-<img width="20%" src="sys.eval.png?rev=<?=time();?>" title="Evaluate" name="<?=$value;?>" onclick="window.location.href='evaluate.php?id='+this.name;">
 </td>
 </tr>
 <?php } ?>
@@ -164,14 +157,13 @@ foreach ($list as $key=>$value) {
     foreach ($list as $key=>$value) {
         $thymode = file_get_contents($value.'/mode');
         $thyrating = file_get_contents($value.'/rating');
-        $sideicon = 'sys.'.$thymode.'.png';
         $footlist = str_replace($value.'/','',(glob($value.'/foot'.$alpha.'*.png')));
         foreach ($footlist as $iter=>$item) {
             if ($thyrating >= 0) {
-                $icon = (file_exists($value.'/'.$item)) ? $value.'/'.$item : "sys.foot.".$thymode.".png";
+                $icon = $value.'/'.$item;
                 $link = $icon;
             } elseif ($thyrating < 0) {
-                $icon = 'sys.dead.png';
+                $icon = 'sys.error.png';
                 $link = "javascript:manage('kill', '', '".$value."');";
             }
 ?>
