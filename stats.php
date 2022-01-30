@@ -138,6 +138,7 @@ foreach ($list as $key=>$value) {
 </td>
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
+<img width="20%" src="sys.foot.png?rev=<?=time();?>" title="Feet Pics" name="<?=$value;?>" onclick="window.location.href = 'stats.php?q=' + this.name + '&alpha=' + aField.value + '&view=1';">
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
