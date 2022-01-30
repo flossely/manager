@@ -151,7 +151,7 @@ foreach ($list as $key=>$value) {
         $entityType = 'SYSTEM';
         $entTypeIMG = 'sys.launch.png';
         $entTypeOnClick = "window.location.href = '".$value."';";
-    } elseif (file_exists($value.'/name') && $value.'/description')) {
+    } elseif (file_exists($value.'/name') && file_exists($value.'/description')) {
         $entityType = 'BUSINESS';
         $entTypeIMG = 'sys.help.png';
         $entTypeOnClick = "window.location.href = '".$value."';";
