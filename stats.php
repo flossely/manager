@@ -136,35 +136,30 @@ function rotate(a, q, x) {
 foreach ($list as $key=>$value) {
     $thymode = file_get_contents($value.'/mode');
     $thyrating = file_get_contents($value.'/rating');
-    if ($thyrating >= 0) {
-        $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr.png";
-        $link = $value;
-    } elseif ($thyrating < 0) {
-        $icon = 'sys.error.png';
-        $link = "javascript:manage('kill', '', '".$value."');";
-    }
+    $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr.png";
+    $link = $value;
     if (file_exists($value.'/foot'.$alpha.'.png')) {
         $entityType = 'FEET PICS';
         $entTypeIMG = 'sys.foot.png';
-        $entTypeOnClick = "window.location.href = 'stats.php?q=".$value."&alpha=".$alpha."&view=1';";
+        $entTypeLink = "stats.php?q=".$value."&alpha=".$alpha."&view=1";
     } elseif (file_exists($value.'/get.php')) {
         $entityType = 'SYSTEM';
         $entTypeIMG = 'sys.launch.png';
-        $entTypeOnClick = "window.location.href = '".$value."';";
+        $entTypeLink = $value;
     } elseif (file_exists($value.'/name') && file_exists($value.'/description')) {
         $entityType = 'BUSINESS';
         $entTypeIMG = 'sys.help.png';
-        $entTypeOnClick = "window.location.href = '".$value."';";
-    } elseif (file_exists($value.'/warning')) {
-        $entityWarn = file_get_contents($value.'/warning');
+        $entTypeLink = $value;
+    } elseif (file_exists($value.'/tag')) {
+        $entityWarn = file_get_contents($value.'/tag');
         $entityWarnPart = explode('=|1|=', $entityWarn);
         $entityType = $entityWarnPart[0];
         $entTypeIMG = $entityWarnPart[1];
-        $entTypeOnClick = "manage('kill', '', '".$value."');";
+        $entTypeLink = $value;
     } else {
         $entityType = 'PROFILE';
         $entTypeIMG = 'sys.img.png';
-        $entTypeOnClick = "window.location.href = '".$value."';";
+        $entTypeLink = $value;
     }
 ?>
 <tr>
@@ -181,7 +176,7 @@ foreach ($list as $key=>$value) {
 </td>
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
-<img width="20%" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="<?=$entTypeOnClick;?>">
+<img width="20%" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
@@ -195,13 +190,8 @@ foreach ($list as $key=>$value) {
         $thyrating = file_get_contents($value.'/rating');
         $footlist = str_replace($value.'/','',(glob($value.'/foot'.$alpha.'*.png')));
         foreach ($footlist as $iter=>$item) {
-            if ($thyrating >= 0) {
-                $icon = $value.'/'.$item;
-                $link = $icon;
-            } elseif ($thyrating < 0) {
-                $icon = 'sys.error.png';
-                $link = "javascript:manage('kill', '', '".$value."');";
-            }
+            $icon = $value.'/'.$item;
+            $link = $icon;
 ?>
 <img style="width:96%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
 <?php }}} ?>
