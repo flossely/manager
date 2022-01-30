@@ -90,7 +90,7 @@ function rotate(a, q, x) {
     find(this.value);
 }">
 <input class='actionButton' type="button" value=">" onclick="find(search.value);">
-<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(aField.name, qField.name, viewField.name);">
+<input class='actionButton'  type="button" value="/" onclick="manage('reset', '', '');">
 <input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=$alpha;?>" onclick="rotate(aField.name, qField.name, viewField.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
