@@ -143,6 +143,23 @@ foreach ($list as $key=>$value) {
         $icon = 'sys.error.png';
         $link = "javascript:manage('kill', '', '".$value."');";
     }
+    if (file_exists($value.'/foot'.$alpha.'.png')) {
+        $entityType = 'FEET PICS';
+        $entTypeIMG = 'sys.foot.png';
+        $entTypeOnClick = "window.location.href = 'stats.php?q=".$value."&alpha=".$alpha."&view=1';";
+    } elseif (file_exists($value.'/get.php')) {
+        $entityType = 'SYSTEM';
+        $entTypeIMG = 'sys.launch.png';
+        $entTypeOnClick = "window.location.href = '".$value."';";
+    } elseif (file_exists($value.'/name') && $value.'/description')) {
+        $entityType = 'BUSINESS';
+        $entTypeIMG = 'sys.help.png';
+        $entTypeOnClick = "window.location.href = '".$value."';";
+    } else {
+        $entityType = 'PROFILE';
+        $entTypeIMG = 'sys.img.png';
+        $entTypeOnClick = "window.location.href = '".$value."';";
+    }
 ?>
 <tr>
 <td>
@@ -158,10 +175,10 @@ foreach ($list as $key=>$value) {
 </td>
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
-<?php if (file_exists($value.'/foot'.$alpha.'.png')) { ?>
-<img width="20%" src="sys.foot.png?rev=<?=time();?>" title="Feet Pics" name="<?=$value;?>" onclick="window.location.href = 'stats.php?q=' + this.name + '&alpha=' + aField.name + '&view=1';">
+<?php if ($entityType == 'FEET PICS') { ?>
+<img width="20%" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="<?=$entTypeOnClick;?>">
 <?php } else { ?>
-<img width="20%" src="sys.img.png?rev=<?=time();?>" title="Profile Image" name="<?=$value;?>" onclick="window.location.href = this.name + '/favicon.png';">
+<img width="20%" src="sys.img.png?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = this.name + '/favicon.png';">
 <?php } ?>
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
