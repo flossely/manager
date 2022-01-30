@@ -1,13 +1,17 @@
 <?php
 function whatSide($a) {
+    define('UP_ARROW', '&#9757;');
+    define('DOWN_ARROW', '&#9759;');
+    define('LEFT_ARROW', '&#9754;');
+    define('RIGHT_ARROW', '&#9755;');
     if ($a == 'u') {
-        return '&#8593;';
+        return UP_ARROW;
     } elseif ($a == 'd') {
-        return '&#8595;';
+        return DOWN_ARROW;
     } elseif ($a == 'l') {
-        return '&#8592;';
+        return LEFT_ARROW;
     } elseif ($a == 'r') {
-        return '&#8594;';
+        return RIGHT_ARROW;
     }
 }
 
