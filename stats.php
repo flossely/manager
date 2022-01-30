@@ -23,8 +23,13 @@ if ($_REQUEST) {
     $alpha = 'u';
 }
 foreach ($list as $key=>$value) {
-    if (!file_exists($value.'/mode') && !file_exists($value.'/rating')) {
+    if (!file_exists($value.'/rating') && !file_exists($value.'/mode')) {
         unset($list[array_search($value, $list)]);
+    } else {
+        $profRating = file_get_contents($value.'/rating');
+        if ($profRating < 0) {
+            unset($list[array_search($value, $list)]);
+        }
     }
 }
 ?>
