@@ -8,21 +8,7 @@
 <script src="base.js"></script>
 <script src="jquery.js"></script>
 <script src="sort.js"></script>
-<script>
-function manage(mode, id, data) {
-    var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
-    $.ajax({
-        type: "POST",
-        url: "manage.php",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            document.location.reload();
-        }
-    });
-    return false;
-}
-</script>
+<script src="manage.js"></script>
 </head>
 <body>
 <p align="center">

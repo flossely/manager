@@ -38,6 +38,7 @@ foreach ($list as $key=>$value) {
 <script src="base.js"></script>
 <script src="jquery.js"></script>
 <script src="sort.js"></script>
+<script src="manage.js"></script>
 <script>
 window.onload = function() {
     document.getElementById('search').focus();
@@ -74,19 +75,6 @@ function rotate(a, q, x) {
         a = 'u';
     }
     window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x;
-}
-function manage(mode, id, data) {
-    var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
-    $.ajax({
-        type: "POST",
-        url: "manage.php",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            document.location.reload();
-        }
-    });
-    return false;
 }
 </script>
 </head>

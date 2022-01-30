@@ -1,8 +1,11 @@
 <?php
 $dir = '.';
 define('LEFT_COLOR', 'd83d48');
+define('LEFT_FORE_COLOR', 'a2252e');
 define('CENTER_COLOR', '009f8c');
+define('CENTER_FORE_COLOR', '19635b');
 define('RIGHT_COLOR', '5f677a');
+define('RIGHT_FORE_COLOR', '383c4a');
 $profList = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
 foreach ($profList as $key=>$value) {
     if (!file_exists($value.'/rating') && !file_exists($value.'/mode')) {
@@ -18,6 +21,8 @@ $actionFile = file_get_contents('actions');
 $actionList = explode(';', $actionFile);
 $interFile = file_get_contents('interact');
 $interList = explode(';', $interFile);
+$launchFile = file_get_contents('launch');
+$launchList = explode(';', $launchFile);
 ?>
 <html>
 <head>
@@ -29,34 +34,7 @@ $interList = explode(';', $interFile);
 <script src="base.js"></script>
 <script src="jquery.js"></script>
 <script src="sort.js"></script>
-<script>
-function manage(mode, id, data) {
-    var dataString = 'mode=' + mode + '&id=' + id + '&data=' + data;
-    $.ajax({
-        type: "POST",
-        url: "manage.php",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            document.location.reload();
-        }
-    });
-    return false;
-}
-function interact(sub, act, obj) {
-    var dataString = 'sub=' + sub + '&act=' + act + '&obj=' + obj;
-    $.ajax({
-        type: "POST",
-        url: "interact.php",
-        data: dataString,
-        cache: false,
-        success: function(html) {
-            document.location.reload();
-        }
-    });
-    return false;
-}
-</script>
+<script src="manage.js"></script>
 </head>
 <body>
 <div class='top'>
@@ -68,6 +46,11 @@ function interact(sub, act, obj) {
 </select>
 <select id="chooseInteract">
 <?php foreach ($interList as $key=>$value) { ?>
+<option id="<?=$value;?>"><?=$value.'()';?></option>
+<?php } ?>
+</select>
+<select id="chooseLaunch">
+<?php foreach ($launchList as $key=>$value) { ?>
 <option id="<?=$value;?>"><?=$value.'()';?></option>
 <?php } ?>
 </select>
@@ -87,14 +70,19 @@ foreach ($profList as $key=>$value) {
     $profOpenMode = file_get_contents($value.'/mode');
     if ($profOpenMode > 0) {
         $profColor = RIGHT_COLOR;
+        $profForeColor = RIGHT_FORE_COLOR;
     } elseif ($profOpenMode < 0) {
         $profColor = LEFT_COLOR;
+        $profForeColor = LEFT_FORE_COLOR;
     } else {
         $profColor = CENTER_COLOR;
+        $profForeColor = CENTER_FORE_COLOR;
     }
     $profDefineColor = '#'.$profColor;
+    $profDefineForeColor = '#'.$profForeColor;
 ?>
-<input type="button" class='hover' style="background-color:<?=$profDefineColor;?>;color:#fff;" name="<?=$value;?>" value="<?=$value.'('.$profNowRating.')';?>" onclick="interact(chooseProfile.options[chooseProfile.selectedIndex].id, chooseInteract.options[chooseInteract.selectedIndex].id, this.name);">
+<input type="button" class='hover' style="background-color:<?=$profDefineColor;?>;color:#fff;" name="<?=$value;?>" value="<?=$value;?>" onclick="interact(chooseProfile.options[chooseProfile.selectedIndex].id, chooseInteract.options[chooseInteract.selectedIndex].id, this.name);">
+<input type="button" class='hover' style="background-color:<?=$profDefineForeColor;?>;color:#fff;" name="chooseLaunch.options[chooseLaunch.selectedIndex].id" value="<?=$profNowRating;?>" onclick="launch(this.name, '<?=$value;?>');">
 <?php } ?>
 </p>
 </div>
