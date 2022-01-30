@@ -1,1 +1,1 @@
-flossely=|2|=APP=|2|=1.0=|2|=1586=|2|=January 2022=|2|=A former part of stats package, this app used to manage entities inside a server instance or any directory path inside it.=|1|=manager.php;manager.app;stats.app;stats.php;evaluate.php;launch.app;launch.php;
+flossely=|2|=APP=|2|=1.4=|2|=1586=|2|=January 2022=|2|=A former part of stats package, this app used to manage entities inside a server instance or any directory path inside it.=|1|=manager.php;manager.app;stats.app;stats.php;evaluate.php;launch.app;launch.php;interactor.php;interactor.app;
