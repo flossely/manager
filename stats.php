@@ -155,6 +155,12 @@ foreach ($list as $key=>$value) {
         $entityType = 'BUSINESS';
         $entTypeIMG = 'sys.help.png';
         $entTypeOnClick = "window.location.href = '".$value."';";
+    } elseif (file_exists($value.'/warning')) {
+        $entityWarn = file_get_contents($value.'/warning');
+        $entityWarnPart = explode('=|1|=', $entityWarn);
+        $entityType = $entityWarnPart[0];
+        $entTypeIMG = $entityWarnPart[1];
+        $entTypeOnClick = "manage('kill', '', '".$value."');";
     } else {
         $entityType = 'PROFILE';
         $entTypeIMG = 'sys.img.png';
