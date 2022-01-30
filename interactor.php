@@ -82,7 +82,7 @@ foreach ($profList as $key=>$value) {
     $profDefineForeColor = '#'.$profForeColor;
 ?>
 <input type="button" class='hover' style="background-color:<?=$profDefineColor;?>;color:#fff;" name="<?=$value;?>" value="<?=$value;?>" onclick="interact(chooseProfile.options[chooseProfile.selectedIndex].id, chooseInteract.options[chooseInteract.selectedIndex].id, this.name);">
-<input type="button" class='hover' style="background-color:<?=$profDefineForeColor;?>;color:#fff;" name="chooseLaunch.options[chooseLaunch.selectedIndex].id" value="<?=$profNowRating;?>" onclick="launch(this.name, '<?=$value;?>');">
+<input type="button" class='hover' style="background-color:<?=$profDefineForeColor;?>;color:#fff;" name="<?=$value;?>" value="<?=$profNowRating;?>" onclick="launch(chooseLaunch.options[chooseLaunch.selectedIndex].id, this.name);">
 <?php } ?>
 </p>
 </div>
