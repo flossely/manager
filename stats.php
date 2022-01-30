@@ -1,4 +1,16 @@
 <?php
+function whatSide($a) {
+    if ($a == 'u') {
+        return 'N';
+    } elseif ($a == 'd') {
+        return 'S';
+    } elseif ($a == 'l') {
+        return 'W';
+    } elseif ($a == 'r') {
+        return 'E';
+    }
+}
+
 $dir = '.';
 if ($_REQUEST) {
     $q = ($_REQUEST['q']) ? $_REQUEST['q'] : '';
@@ -93,9 +105,9 @@ function rotate(a, q, x) {
 <?php if ($view == 1) { ?>
 <input class='actionButton'  type="button" name="<?=$view;?>" value="<" onclick="swap(aField.name, qField.name, viewField.name);">
 <?php } else { ?>
-<input class='actionButton'  type="button" value="O" onclick="manage('reset', '', '');">
+<input class='actionButton'  type="button" value="R" onclick="manage('reset', '', '');">
 <?php } ?>
-<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=$alpha;?>" onclick="rotate(aField.name, qField.name, viewField.name);">
+<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=whatSide($alpha);?>" onclick="rotate(aField.name, qField.name, viewField.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
 <input type='hidden' id='aField' name="<?=$alpha;?>">
