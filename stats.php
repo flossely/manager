@@ -91,9 +91,9 @@ function rotate(a, q, x) {
 }">
 <input class='actionButton' type="button" value=">" onclick="find(search.value);">
 <?php if ($view == 1) { ?>
-<input class='actionButton'  type="button" name="<?=$view;?>" value="<?=$view;?>" onclick="swap(aField.name, qField.name, viewField.name);">
+<input class='actionButton'  type="button" name="<?=$view;?>" value="<" onclick="swap(aField.name, qField.name, viewField.name);">
 <?php } else { ?>
-<input class='actionButton'  type="button" value="/" onclick="manage('reset', '', '');">
+<input class='actionButton'  type="button" value="O" onclick="manage('reset', '', '');">
 <?php } ?>
 <input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=$alpha;?>" onclick="rotate(aField.name, qField.name, viewField.name);">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
