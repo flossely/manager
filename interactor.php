@@ -73,6 +73,8 @@ function interact(sub, act, obj) {
 </select>
 <input type="button" value="Next Turn">
 <input type="button" value="Reset" onclick="manage('reset', '', '');">
+<input type="button" value="U" onclick="seq('i,from,entity,flossely', 'i,from,manager,flossely');">
+<input type="button" value="X" onclick="window.location.href = 'index.php';">
 </p>
 </div>
 <div class='panel'>
