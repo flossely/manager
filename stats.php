@@ -158,7 +158,11 @@ foreach ($list as $key=>$value) {
 </td>
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
+<?php if (file_exists($value.'/foot'.$alpha.'.png')) { ?>
 <img width="20%" src="sys.foot.png?rev=<?=time();?>" title="Feet Pics" name="<?=$value;?>" onclick="window.location.href = 'stats.php?q=' + this.name + '&alpha=' + aField.name + '&view=1';">
+<?php } else { ?>
+<img width="20%" src="sys.img.png?rev=<?=time();?>" title="Profile Image" name="<?=$value;?>" onclick="window.location.href = this.name + '/favicon.png';">
+<?php } ?>
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
