@@ -1,13 +1,13 @@
 <?php
 function whatSide($a) {
     if ($a == 'u') {
-        return 'N';
+        return '&#8593;';
     } elseif ($a == 'd') {
-        return 'S';
+        return '&#8595;';
     } elseif ($a == 'l') {
-        return 'W';
+        return '&#8592;';
     } elseif ($a == 'r') {
-        return 'E';
+        return '&#8594;';
     }
 }
 
