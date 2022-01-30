@@ -81,8 +81,10 @@ foreach ($profList as $key=>$value) {
     $profDefineColor = '#'.$profColor;
     $profDefineForeColor = '#'.$profForeColor;
 ?>
-<input type="button" class='hover' style="background-color:<?=$profDefineColor;?>;color:#fff;" name="<?=$value;?>" value="<?=$value;?>" onclick="interact(chooseProfile.options[chooseProfile.selectedIndex].id, chooseInteract.options[chooseInteract.selectedIndex].id, this.name);">
-<input type="button" class='hover' style="background-color:<?=$profDefineForeColor;?>;color:#fff;" name="<?=$value;?>" value="<?=$profNowRating;?>" onclick="launch(chooseLaunch.options[chooseLaunch.selectedIndex].id, this.name);">
+<p align='center'>
+<input type="button" class='hover' style="background-color:<?=$profDefineColor;?>;color:#fff;width:60%;" name="<?=$value;?>" value="<?=$value;?>" onclick="interact(chooseProfile.options[chooseProfile.selectedIndex].id, chooseInteract.options[chooseInteract.selectedIndex].id, this.name);">
+<input type="button" class='hover' style="background-color:<?=$profDefineForeColor;?>;color:#fff;width:40%;" name="<?=$value;?>" value="<?=$profNowRating;?>" onclick="launch(chooseLaunch.options[chooseLaunch.selectedIndex].id, this.name);">
+</p>
 <?php } ?>
 </p>
 </div>
