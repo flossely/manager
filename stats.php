@@ -175,11 +175,7 @@ foreach ($list as $key=>$value) {
 </td>
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
-<?php if ($entityType == 'FEET PICS') { ?>
 <img width="20%" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="<?=$entTypeOnClick;?>">
-<?php } else { ?>
-<img width="20%" src="sys.img.png?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = this.name + '/favicon.png';">
-<?php } ?>
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
