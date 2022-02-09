@@ -123,7 +123,7 @@ foreach ($list as $key=>$value) {
     if (file_exists($value.'/foot'.$alpha.'.png')) {
         $entityType = 'FEET PICS';
         $entTypeIMG = 'sys.foot.png';
-        $entTypeLink = "stats.php?q=".$value."&alpha=".$alpha."&view=1";
+        $entTypeLink = "stats.php?q=".$value."&alpha=".$alpha."&mode=1";
     } elseif (file_exists($value.'/get.php')) {
         $entityType = 'SYSTEM';
         $entTypeIMG = 'sys.launch.png';
