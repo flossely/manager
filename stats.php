@@ -19,7 +19,7 @@ if ($_REQUEST) {
     if ($alpha == 'u' || $alpha == 'd') {
         $measure = 'height';
     } else {
-        $measure = 'height';
+        $measure = 'width';
     }
 } else {
     $q = '';
@@ -157,9 +157,9 @@ foreach ($list as $key=>$value) {
 <?=$thyrating;?>
 </td>
 <td>
-<img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
-<img style="<?=$measure;?>:20%;position:relative;" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
-<img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
+<img width="25%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
+<img width="30%;" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
+<img width="25%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
 <?php } ?>
