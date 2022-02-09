@@ -26,7 +26,7 @@ if ($_REQUEST) {
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     $mode = 0;
     $alpha = 'u';
-    $measure = 'width';
+    $measure = 'height';
 }
 foreach ($list as $key=>$value) {
     if (!file_exists($value.'/rating') && !file_exists($value.'/mode')) {
@@ -158,7 +158,7 @@ foreach ($list as $key=>$value) {
 </td>
 <td>
 <img width="20%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
-<img width="20%" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
+<img style="<?=$measure;?>:20%;position:relative;" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
 <img width="20%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
