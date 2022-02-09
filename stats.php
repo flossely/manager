@@ -122,25 +122,19 @@ foreach ($list as $key=>$value) {
     $link = $value;
     if (file_exists($value.'/foot'.$alpha.'.png')) {
         $entityType = 'FEET PICS';
-        $entTypeIMG = 'sys.foot.png';
+        $entTypeIMG = $value.'/foot'.$alpha.'.png';
         $entTypeLink = "stats.php?q=".$value."&alpha=".$alpha."&mode=1";
     } elseif (file_exists($value.'/get.php')) {
         $entityType = 'SYSTEM';
-        $entTypeIMG = 'sys.launch.png';
+        $entTypeIMG = 'sys.app.png';
         $entTypeLink = $value;
     } elseif (file_exists($value.'/name') && file_exists($value.'/description')) {
         $entityType = 'BUSINESS';
         $entTypeIMG = 'sys.help.png';
         $entTypeLink = $value;
-    } elseif (file_exists($value.'/tag')) {
-        $entityWarn = file_get_contents($value.'/tag');
-        $entityWarnPart = explode('=|1|=', $entityWarn);
-        $entityType = $entityWarnPart[0];
-        $entTypeIMG = $entityWarnPart[1];
-        $entTypeLink = $value;
     } else {
         $entityType = 'PROFILE';
-        $entTypeIMG = 'sys.img.png';
+        $entTypeIMG = 'sys.dir.png';
         $entTypeLink = $value;
     }
 ?>
@@ -175,7 +169,7 @@ foreach ($list as $key=>$value) {
             $icon = $value.'/'.$item;
             $link = $icon;
 ?>
-<img style="width:96%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
+<img style="<?php if ($alpha == 'u' || $alpha == 'd') { ?>width<?php } else { >height<?php } ?>:96%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
 <?php }}} ?>
 </div>
 </body>
