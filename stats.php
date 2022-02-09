@@ -16,11 +16,17 @@ if ($_REQUEST) {
             }
         }
     }
+    if ($alpha == 'u' || $alpha == 'd') {
+        $measure = 'width';
+    } else {
+        $measure = 'height';
+    }
 } else {
     $q = '';
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     $mode = 0;
     $alpha = 'u';
+    $measure = 'width';
 }
 foreach ($list as $key=>$value) {
     if (!file_exists($value.'/rating') && !file_exists($value.'/mode')) {
