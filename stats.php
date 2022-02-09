@@ -86,7 +86,7 @@ function rotate(a) {
 <body>
 <div class='top'>
 <p align="center">
-<input style="width:50%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
+<input style="width:45%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
     find(this.value);
 }">
 <input class='actionButton' type="button" value=">" onclick="find(search.value);">
