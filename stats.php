@@ -19,7 +19,7 @@ if ($_REQUEST) {
     if ($alpha == 'u' || $alpha == 'd') {
         $measure = 'height';
     } else {
-        $measure = 'width';
+        $measure = 'height';
     }
 } else {
     $q = '';
