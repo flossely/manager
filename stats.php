@@ -17,9 +17,9 @@ if ($_REQUEST) {
         }
     }
     if ($alpha == 'u' || $alpha == 'd') {
-        $measure = 'width';
-    } else {
         $measure = 'height';
+    } else {
+        $measure = 'width';
     }
 } else {
     $q = '';
@@ -175,7 +175,7 @@ foreach ($list as $key=>$value) {
             $icon = $value.'/'.$item;
             $link = $icon;
 ?>
-<img style="<?=$measure;?>:98%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
+<img style="<?=$measure;?>:100%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
 <?php }}} ?>
 </div>
 </body>
