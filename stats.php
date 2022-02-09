@@ -1,20 +1,4 @@
 <?php
-function whatSide($a) {
-    define('UP_ARROW', '&#9757;');
-    define('DOWN_ARROW', '&#9759;');
-    define('LEFT_ARROW', '&#9754;');
-    define('RIGHT_ARROW', '&#9755;');
-    if ($a == 'u') {
-        return UP_ARROW;
-    } elseif ($a == 'd') {
-        return DOWN_ARROW;
-    } elseif ($a == 'l') {
-        return LEFT_ARROW;
-    } elseif ($a == 'r') {
-        return RIGHT_ARROW;
-    }
-}
-
 $dir = '.';
 if ($_REQUEST) {
     $q = ($_REQUEST['q']) ? $_REQUEST['q'] : '';
@@ -23,9 +7,9 @@ if ($_REQUEST) {
     } else {
         $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     }
-    $view = ($_REQUEST['view']) ? $_REQUEST['view'] : 0;
+    $mode = ($_REQUEST['mode']) ? $_REQUEST['mode'] : 0;
     $alpha = ($_REQUEST['alpha']) ? $_REQUEST['alpha'] : 'u';
-    if (($view % 2) != 0) {
+    if (($mode % 2) != 0) {
         foreach ($list as $key=>$value) {
             if (!file_exists($value.'/foot'.$alpha.'.png')) {
                 unset($list[array_search($value, $list)]);
@@ -35,7 +19,7 @@ if ($_REQUEST) {
 } else {
     $q = '';
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
-    $view = 0;
+    $mode = 0;
     $alpha = 'u';
 }
 foreach ($list as $key=>$value) {
@@ -65,7 +49,7 @@ window.onload = function() {
     document.getElementById('search').focus();
 }
 function find(q) {
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + aField.name + '&view=' + viewField.name;
+    window.location.href = 'stats.php?q=' + q + '&alpha=' + alphaField.name + '&mode=' + modeField.name;
 }
 function vote(id,key) {
     if (window.XMLHttpRequest) {
@@ -81,11 +65,11 @@ function vote(id,key) {
     xmlhttp.open("GET","vote.php?id="+id+"&key="+key,false);
     xmlhttp.send();
 }
-function swap(a, q, x) {
+function changeMode(x) {
     x = 1 - x;
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x;
+    window.location.href = 'stats.php?q=' + qField.name + '&alpha=' + alphaField.name + '&mode=' + x;
 }
-function rotate(a, q, x) {
+function rotate(a) {
     if (a == 'u') {
         a = 'r';
     } else if (a == 'r') {
@@ -95,7 +79,7 @@ function rotate(a, q, x) {
     } else if (a == 'l') {
         a = 'u';
     }
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + a + '&view=' + x;
+    window.location.href = 'stats.php?q=' + qField.name + '&alpha=' + a + '&mode=' + modeField.name;
 }
 </script>
 </head>
@@ -106,29 +90,27 @@ function rotate(a, q, x) {
     find(this.value);
 }">
 <input class='actionButton' type="button" value=">" onclick="find(search.value);">
-<?php if ($view == 1) { ?>
-<input class='actionButton'  type="button" name="<?=$view;?>" value="<" onclick="swap(aField.name, qField.name, viewField.name);">
-<?php } else { ?>
-<input class='actionButton'  type="button" value="R" onclick="manage('reset', '', '');">
-<?php } ?>
-<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=whatSide($alpha);?>" onclick="rotate(aField.name, qField.name, viewField.name);">
+<input class='actionButton'  type="button" value="<" onclick="manage('reset', '', '');">
+<input class='actionButton'  type="button" name="<?=$mode;?>" value="<?=$mode;?>" onclick="changeMode(qField.name, alphaField.name, modeField.name);">
+<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=strtoupper($alpha);?>" onclick="rotate(qField.name, alphaField.name, modeField.name);">
+<input class='actionButton'  type="button" value="U" onclick="seq('i,from,entity,flossely;i,from,manager,flossely');">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
-<input type='hidden' id='aField' name="<?=$alpha;?>">
-<input type='hidden' id='viewField' name="<?=$view;?>">
+<input type='hidden' id='alphaField' name="<?=$alpha;?>">
+<input type='hidden' id='modeField' name="<?=$mode;?>">
 </p>
 </div>
 <div class='panel'>
-<?php if (($view % 2) == 0) { ?>
+<?php if (($mode % 2) == 0) { ?>
 <table id="table" width="100%">
 <thead>
 <tr>
-<th width="8%">Icon</th>
-<th width="20%">
+<th width="10%">Icon</th>
+<th width="25%">
 <a href="javascript:SortTable(2,'T');">Name</a></th>
 <th width="12%">
 <a href="javascript:SortTable(3,'N');">Rating</a></th>
-<th width="30%">Actions</th>
+<th width="28%">Actions</th>
 </tr>
 </thead>
 <tbody>
