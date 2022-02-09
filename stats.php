@@ -165,8 +165,9 @@ foreach ($list as $key=>$value) {
 <?php } ?>
 </tbody>
 </table>
+<?php } else { ?>
+<p align='center'>
 <?php
-} else {
     foreach ($list as $key=>$value) {
         $thymode = file_get_contents($value.'/mode');
         $thyrating = file_get_contents($value.'/rating');
@@ -176,7 +177,9 @@ foreach ($list as $key=>$value) {
             $link = $icon;
 ?>
 <img style="<?=$measure;?>:100%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
-<?php }}} ?>
+<?php }} ?>
+</p>
+<?php } ?>
 </div>
 </body>
 </html>
