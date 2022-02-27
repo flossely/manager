@@ -5,10 +5,10 @@
 <title>Entity Manager</title>
 <link rel="shortcut icon" href="sys.manage.png?rev=<?=time();?>" type="image/x-icon">
 <link href="system.css?rev=<?=time();?>" rel="stylesheet">
-<script src="base.js"></script>
-<script src="jquery.js"></script>
-<script src="sort.js"></script>
-<script src="manage.js"></script>
+<script src="base.js?rev=<?=time();?>"></script>
+<script src="jquery.js?rev=<?=time();?>"></script>
+<script src="sort.js?rev=<?=time();?>"></script>
+<script src="manage.js?rev=<?=time();?>"></script>
 </head>
 <body>
 <p align="center">
