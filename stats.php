@@ -157,9 +157,9 @@ foreach ($list as $key=>$value) {
 <?=$thyrating;?>
 </td>
 <td>
-<img class='actionIcon' width="25%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
-<img class='actionIcon' width="30%;" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
-<img class='actionIcon' width="25%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
+<img class='actionIconButton' width="25%" src="sys.downvote.png?rev=<?=time();?>" title="Downvote" name="<?=$value;?>" onclick="vote(this.name, 'down');">
+<img class='actionIconButton' width="30%;" src="<?=$entTypeIMG;?>?rev=<?=time();?>" title="<?=$entityType;?>" name="<?=$value;?>" onclick="window.location.href = '<?=$entTypeLink;?>';">
+<img class='actionIconButton' width="25%" src="sys.upvote.png?rev=<?=time();?>" title="Upvote" name="<?=$value;?>" onclick="vote(this.name, 'up');">
 </td>
 </tr>
 <?php } ?>
@@ -176,7 +176,7 @@ foreach ($list as $key=>$value) {
             $icon = $value.'/'.$item;
             $link = $icon;
 ?>
-<img class='actionIcon' style="<?=$measure;?>:98%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
+<img class='actionIconButton' style="<?=$measure;?>:98%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
 <?php }} ?>
 </p>
 <?php } ?>
