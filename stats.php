@@ -99,7 +99,6 @@ function rotate(a) {
 <input class='actionButton'  type="button" value="<" onclick="manage('reset', '', '');">
 <input class='actionButton'  type="button" name="<?=$mode;?>" value="<?=$mode;?>" onclick="changeMode(modeField.name);">
 <input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=strtoupper($alpha);?>" onclick="rotate(alphaField.name);">
-<input class='actionButton'  type="button" value="P" onclick="seq('i,from,entity,flossely;i,from,manager,flossely');">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
 <input type='hidden' id='alphaField' name="<?=$alpha;?>">
