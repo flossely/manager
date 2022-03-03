@@ -29,7 +29,7 @@ foreach ($list as $key=>$value) {
 window.onload = function() {
     document.getElementById('search').focus();
 }
-function find() {
+function simpleSearch() {
     var q = search.value;
     if (window.XMLHttpRequest)     {
         xmlhttp=new XMLHttpRequest();
@@ -41,7 +41,7 @@ function find() {
             window.location.href = "launch.php?q="+q;
         }
     }
-    xmlhttp.open("GET","launch.php?q="+q,false);
+    xmlhttp.open("GET","?q="+q,false);
     xmlhttp.send();
 }
 </script>
@@ -50,9 +50,9 @@ function find() {
 <div class='top'>
 <p align="center">
 <input style="width:60%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
-    find();
+    simpleSearch();
 }">
-<input class='actionButton' type="button" value=">" onclick="find();">
+<input class='actionButton' type="button" value=">" onclick="simpleSearch();">
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 </p>
 </div>

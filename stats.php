@@ -54,26 +54,12 @@ foreach ($list as $key=>$value) {
 window.onload = function() {
     document.getElementById('search').focus();
 }
-function find(q) {
-    window.location.href = 'stats.php?q=' + q + '&alpha=' + alphaField.name + '&mode=' + modeField.name;
-}
-function vote(id,key) {
-    if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-    } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-            window.location.reload();
-        }
-    };
-    xmlhttp.open("GET","vote.php?id="+id+"&key="+key,false);
-    xmlhttp.send();
+function entityStatsSearch(q) {
+    window.location.href = '?q=' + q + '&alpha=' + alphaField.name + '&mode=' + modeField.name;
 }
 function changeMode(x) {
     x = 1 - x;
-    window.location.href = 'stats.php?q=' + qField.name + '&alpha=' + alphaField.name + '&mode=' + x;
+    window.location.href = '?q=' + qField.name + '&alpha=' + alphaField.name + '&mode=' + x;
 }
 function rotate(a) {
     if (a == 'u') {
@@ -85,7 +71,7 @@ function rotate(a) {
     } else if (a == 'l') {
         a = 'u';
     }
-    window.location.href = 'stats.php?q=' + qField.name + '&alpha=' + a + '&mode=' + modeField.name;
+    window.location.href = '?q=' + qField.name + '&alpha=' + a + '&mode=' + modeField.name;
 }
 </script>
 </head>
@@ -93,9 +79,9 @@ function rotate(a) {
 <div class='top'>
 <p align="center">
 <input style="width:45%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
-    find(this.value);
+    entityStatsSearch(this.value);
 }">
-<input class='actionButton' type="button" value=">" onclick="find(search.value);">
+<input class='actionButton' type="button" value=">" onclick="entityStatsSearch(search.value);">
 <input class='actionButton'  type="button" value="<" onclick="manage('reset', '', '');">
 <input class='actionButton'  type="button" name="<?=$mode;?>" value="<?=$mode;?>" onclick="changeMode(modeField.name);">
 <input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=strtoupper($alpha);?>" onclick="rotate(alphaField.name);">
