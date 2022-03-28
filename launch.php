@@ -29,21 +29,6 @@ foreach ($list as $key=>$value) {
 window.onload = function() {
     document.getElementById('search').focus();
 }
-function simpleSearch() {
-    var q = search.value;
-    if (window.XMLHttpRequest)     {
-        xmlhttp=new XMLHttpRequest();
-    } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-            window.location.href = "launch.php?q="+q;
-        }
-    }
-    xmlhttp.open("GET","?q="+q,false);
-    xmlhttp.send();
-}
 </script>
 </head>
 <body>

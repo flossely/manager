@@ -31,7 +31,7 @@ foreach ($actionList as $key=>$value) {
 <?php } ?>
 </select>
 <input class='actionButton' type="button" style="width:86px;" value="ENTER" onclick="manage(actionSel.options[actionSel.selectedIndex].id, entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:96px;" value="UPDATE" onclick="seq('i,from,manager,flossely;i,from,entity,flossely');">
+<input class='actionButton' type="button" style="width:96px;" value="UPDATE" onclick="get('i','','from','manager','','flossely');get('i','','from','entity','','flossely');">
 <input class='actionButton' type="button" style="width:64px;" value="EXIT" onclick="window.location.href = 'index.php';">
 </p>
 </body>
