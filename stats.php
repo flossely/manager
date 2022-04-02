@@ -1,4 +1,19 @@
 <?php
+
+$limitsArr =
+[
+    '' => 'A',
+    'g' => 'G',
+    'x' => 'X',
+];
+$alphasArr =
+[
+    'l' => '&larr;',
+    'u' => '&uarr;',
+    'r' => '&rarr;',
+    'd' => '&darr;',
+];
+
 $dir = '.';
 if ($_REQUEST) {
     $q = ($_REQUEST['q']) ? $_REQUEST['q'] : '';
@@ -7,37 +22,43 @@ if ($_REQUEST) {
     } else {
         $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
     }
-    $mode = ($_REQUEST['mode']) ? $_REQUEST['mode'] : 0;
+    $limit = ($_REQUEST['limit']) ? $_REQUEST['limit'] : '';
     $alpha = ($_REQUEST['alpha']) ? $_REQUEST['alpha'] : 'u';
-    if (($mode % 2) != 0) {
-        foreach ($list as $key=>$value) {
-            if (!file_exists($value.'/foot'.$alpha.'.png')) {
-                unset($list[array_search($value, $list)]);
-            }
-        }
-    }
-    if ($alpha == 'u' || $alpha == 'd') {
-        $measure = 'height';
-    } else {
-        $measure = 'width';
-    }
 } else {
     $q = '';
     $list = str_replace($dir.'/','',(glob($dir.'/*', GLOB_ONLYDIR)));
-    $mode = 0;
+    $limit = '';
     $alpha = 'u';
+}
+
+if ($alpha == 'l' || $alpha == 'r') {
+    $measure = 'width';
+} else {
     $measure = 'height';
 }
+
 foreach ($list as $key=>$value) {
-    if (!file_exists($value.'/rating') && !file_exists($value.'/mode')) {
-        unset($list[array_search($value, $list)]);
+  if (!file_exists($value.'/mode') && !file_exists($value.'/rating')) {
+    unset($list[array_search($value, $list)]);
+  } else {
+    $profRating = file_get_contents($value.'/rating');
+    $profMode = file_get_contents($value.'/mode');
+    if ($profRating < 0) {
+      unset($list[array_search($value, $list)]);
     } else {
-        $profRating = file_get_contents($value.'/rating');
-        if ($profRating < 0) {
-            unset($list[array_search($value, $list)]);
+      if ($limit == 'x') {
+        if (!file_exists($value.'/foot'.$alpha.'.png')) {
+          unset($list[array_search($value, $list)]);
         }
+      } elseif ($limit == 'g') {
+        if (file_exists($value.'/foot'.$alpha.'.png')) {
+          unset($list[array_search($value, $list)]);
+        }
+      }
     }
+  }
 }
+
 ?>
 <html>
 <head>
@@ -55,44 +76,57 @@ window.onload = function() {
     document.getElementById('search').focus();
 }
 function entityStatsSearch(q) {
-    window.location.href = '?q=' + q + '&alpha=' + alphaField.name + '&mode=' + modeField.name;
+    window.location.href = '?q=' + q + '&alpha=' + alphaField.name + '&limit=' + limitField.name;
 }
-function changeMode(x) {
-    x = 1 - x;
-    window.location.href = '?q=' + qField.name + '&alpha=' + alphaField.name + '&mode=' + x;
+function limit(x) {
+    window.location.href = '?q=' + qField.name + '&alpha=' + alphaField.name + '&limit=' + x;
 }
 function rotate(a) {
-    if (a == 'u') {
-        a = 'r';
-    } else if (a == 'r') {
-        a = 'd';
-    } else if (a == 'd') {
-        a = 'l';
-    } else if (a == 'l') {
-        a = 'u';
-    }
-    window.location.href = '?q=' + qField.name + '&alpha=' + a + '&mode=' + modeField.name;
+    window.location.href = '?q=' + qField.name + '&alpha=' + a + '&limit=' + limitField.name;;
 }
 </script>
 </head>
 <body>
 <div class='top'>
 <p align="center">
-<input style="width:45%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
+<input style="width:47%;" type="text" id="search" placeholder="Enter the search query" value="" onkeydown="if (event.keyCode == 13) {
     entityStatsSearch(this.value);
 }">
 <input class='actionButton' type="button" value=">" onclick="entityStatsSearch(search.value);">
-<input class='actionButton'  type="button" value="<" onclick="manage('reset', '', '');">
-<input class='actionButton'  type="button" name="<?=$mode;?>" value="<?=$mode;?>" onclick="changeMode(modeField.name);">
-<input class='actionButton'  type="button" name="<?=$alpha;?>" value="<?=strtoupper($alpha);?>" onclick="rotate(alphaField.name);">
+<select id="chooseLimit" onchange="limit(chooseLimit.options[chooseLimit.selectedIndex].id);">
+<option><?=$limitsArr[$limit];?></option>
+<?php foreach ($limitsArr as $key=>$value) { ?>
+<option id="<?=$key;?>"><?=$value;?></option>
+<?php } ?>
+</select>
+<select id="chooseAlpha" onchange="rotate(chooseAlpha.options[chooseAlpha.selectedIndex].id);">
+<option><?=$alphasArr[$alpha];?></option>
+<?php foreach ($alphasArr as $key=>$value) { ?>
+<option id="<?=$key;?>"><?=$value;?></option>
+<?php } ?>
+</select>
 <input class='actionButton' type="button" value="X" onclick="window.location.href = 'index.php';">
 <input type='hidden' id='qField' name="<?=$q;?>">
 <input type='hidden' id='alphaField' name="<?=$alpha;?>">
-<input type='hidden' id='modeField' name="<?=$mode;?>">
+<input type='hidden' id='limitField' name="<?=$limit;?>">
 </p>
 </div>
 <div class='panel'>
-<?php if (($mode % 2) == 0) { ?>
+<?php if ($limit == 'x') { ?>
+<p align='center'>
+<?php
+    foreach ($list as $key=>$value) {
+        $thymode = file_get_contents($value.'/mode');
+        $thyrating = file_get_contents($value.'/rating');
+        $footlist = str_replace($value.'/','',(glob($value.'/foot'.$alpha.'*.png')));
+        foreach ($footlist as $iter=>$item) {
+            $icon = $value.'/'.$item;
+            $link = $icon;
+?>
+<img class='actionIconButton' style="<?=$measure;?>:98%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
+<?php }} ?>
+</p>
+<?php } else { ?>
 <table id="table" width="100%">
 <thead>
 <tr>
@@ -112,20 +146,12 @@ foreach ($list as $key=>$value) {
     $icon = (file_exists($value.'/favicon.png')) ? $value.'/favicon.png' : "sys.usr.png";
     $link = $value;
     if (file_exists($value.'/foot'.$alpha.'.png')) {
-        $entityType = 'FEET PICS';
+        $entityType = 'NSFW Account';
         $entTypeIMG = $value.'/foot'.$alpha.'.png';
-        $entTypeLink = "stats.php?q=".$value."&alpha=".$alpha."&mode=1";
-    } elseif (file_exists($value.'/get.php')) {
-        $entityType = 'SYSTEM';
-        $entTypeIMG = 'sys.app.png';
-        $entTypeLink = $value;
-    } elseif (file_exists($value.'/name') && file_exists($value.'/description')) {
-        $entityType = 'BUSINESS';
-        $entTypeIMG = 'sys.help.png';
-        $entTypeLink = $value;
+        $entTypeLink = "stats.php?q=".$value."&alpha=".$alpha."&limit=x";
     } else {
-        $entityType = 'PROFILE';
-        $entTypeIMG = 'sys.dir.png';
+        $entityType = 'Normal Account';
+        $entTypeIMG = 'sys.launch.png';
         $entTypeLink = $value;
     }
 ?>
@@ -150,20 +176,6 @@ foreach ($list as $key=>$value) {
 <?php } ?>
 </tbody>
 </table>
-<?php } else { ?>
-<p align='center'>
-<?php
-    foreach ($list as $key=>$value) {
-        $thymode = file_get_contents($value.'/mode');
-        $thyrating = file_get_contents($value.'/rating');
-        $footlist = str_replace($value.'/','',(glob($value.'/foot'.$alpha.'*.png')));
-        foreach ($footlist as $iter=>$item) {
-            $icon = $value.'/'.$item;
-            $link = $icon;
-?>
-<img class='actionIconButton' style="<?=$measure;?>:98%;" name="<?=$link;?>" title="<?=$value;?>" src="<?=$value.'/'.$item;?>?rev=<?=time();?>" onclick="window.location.href=this.name;">
-<?php }} ?>
-</p>
 <?php } ?>
 </div>
 </body>
