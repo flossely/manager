@@ -1,1 +1,0 @@
-NSFW Only Profiles=||=sys.foot.png=||=window.location.href='stats.php?limit=x';

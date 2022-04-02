@@ -1,1 +1,1 @@
-Profile Stats=||=sys.stats.png=||=window.location.href='stats.php?limit=g';
+Stats=||=sys.stats.png=||=window.location.href='stats.php?limit=g';
