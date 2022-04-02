@@ -4,6 +4,8 @@ $limitsArr =
 [
     '' => 'A',
     'g' => 'G',
+    'm' => 'M',
+    'r' => 'R',
     'x' => 'X',
 ];
 $alphasArr =
@@ -46,11 +48,11 @@ foreach ($list as $key=>$value) {
     if ($profRating < 0) {
       unset($list[array_search($value, $list)]);
     } else {
-      if ($limit == 'x') {
+      if ($limit == 'r' || $limit == 'x') {
         if (!file_exists($value.'/foot'.$alpha.'.png')) {
           unset($list[array_search($value, $list)]);
         }
-      } elseif ($limit == 'g') {
+      } elseif ($limit == 'g' || $limit == 'm') {
         if (file_exists($value.'/foot'.$alpha.'.png')) {
           unset($list[array_search($value, $list)]);
         }
