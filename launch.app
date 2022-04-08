@@ -1,1 +1,1 @@
-Launch Platform=||=sys.launch.png=||=window.location.href='launch.php';
+Launch Platform|[1]|sys.launch.png|[1]|window.location.href='launch.php';
