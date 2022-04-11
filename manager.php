@@ -30,9 +30,9 @@ foreach ($actionList as $key=>$value) {
 <option id="<?=$value;?>"><?=$value.'()';?></option>
 <?php } ?>
 </select>
-<input class='actionButton' type="button" style="width:86px;" value="ENTER" onclick="manage(actionSel.options[actionSel.selectedIndex].id, entityID.value, entities.value);">
-<input class='actionButton' type="button" style="width:96px;" value="UPDATE" onclick="get('i','','from','manager','','flossely');get('i','','from','entity','','flossely');">
-<input class='actionButton' type="button" style="width:64px;" value="EXIT" onclick="window.location.href = 'index.php';">
+<input class='actionButton' type="button" style="width:86px;" value="Enter" onclick="manage(actionSel.options[actionSel.selectedIndex].id, entityID.value, entities.value);">
+<input class='actionButton' type="button" style="width:96px;" value="Update" onclick="get('i','','from','manager','','flossely');get('i','','from','entity','','flossely');">
+<input class='actionButton' type="button" style="width:64px;" value="Exit" onclick="window.location.href = 'index.php';">
 </p>
 </body>
 </html>
