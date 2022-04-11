@@ -134,9 +134,9 @@ function rotate(a) {
 <tr>
 <th width="10%">Icon</th>
 <th width="25%">
-<a href="javascript:SortTable(2,'T');">Name</a></th>
+<a href="javascript:SortTable(1,'T');">Name</a></th>
 <th width="12%">
-<a href="javascript:SortTable(3,'N');">Rating</a></th>
+<a href="javascript:SortTable(2,'N');">Rating</a></th>
 <th width="28%">Actions</th>
 </tr>
 </thead>
