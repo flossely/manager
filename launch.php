@@ -23,8 +23,7 @@ foreach ($list as $key=>$value) {
 <title>Launch Platform</title>
 <link rel="shortcut icon" href="sys.launch.png?rev=<?=time();?>" type="image/x-icon">
 <link href="system.css?rev=<?=time();?>" rel="stylesheet">
-<script src="base.js?rev=<?=time();?>"></script>
-<script src="jquery.js?rev=<?=time();?>"></script>
+<?php include 'base.incl.php'; ?>
 <script>
 window.onload = function() {
     document.getElementById('search').focus();

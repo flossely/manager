@@ -69,10 +69,8 @@ foreach ($list as $key=>$value) {
 <title>Stats</title>
 <link rel="shortcut icon" href="sys.stats.png?rev=<?=time();?>" type="image/x-icon">
 <link href="system.css?rev=<?=time();?>" rel="stylesheet">
-<script src="base.js?rev=<?=time();?>"></script>
-<script src="jquery.js?rev=<?=time();?>"></script>
-<script src="sort.js?rev=<?=time();?>"></script>
-<script src="manage.js?rev=<?=time();?>"></script>
+<?php include 'base.incl.php'; ?>
+<?php include 'entity.incl.php'; ?>
 <script>
 window.onload = function() {
     document.getElementById('search').focus();
