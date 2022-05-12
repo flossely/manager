@@ -1,1 +1,1 @@
-Stats|[1]|sys.stats.png|[1]|window.location.href='stats.php?limit=g';
+Stats|[1]|sys.stats.png|[1]|window.location.href='stats.php';
