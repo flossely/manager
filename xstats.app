@@ -1,1 +1,0 @@
-Stats (X-Rated)|[1]|sys.foot.png|[1]|window.location.href='stats.php?limit=x';
